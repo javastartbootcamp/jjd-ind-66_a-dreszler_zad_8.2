@@ -1,11 +1,14 @@
 package pl.javastart.task.model;
 
-import java.util.Arrays;
-
 public class TicketCash {
     private static final int INITIAL_EVENT_MAX = 3;
     private static final double STUDENT_DISCOUNT = 0.23;
     private static final double PASSPORT_DISCOUNT = 0.5;
+    private static final int STUDENT_DISCOUNT_OPTION = 1;
+    private static final int PASSPORT_DISCOUNT_OPTION = 2;
+    private static final int ONLINE = 1;
+    private static final int STANDARD = 2;
+    private static final int GIFT = 3;
     private static final double INVALID_VALUE = -1;
     private int currentTicketId = 1;
     private Event[] events = new Event[INITIAL_EVENT_MAX];
@@ -31,9 +34,9 @@ public class TicketCash {
 
     public double setDiscount(int option) {
         switch (option) {
-            case 1:
+            case STUDENT_DISCOUNT_OPTION:
                 return STUDENT_DISCOUNT;
-            case 2:
+            case PASSPORT_DISCOUNT_OPTION:
                 return PASSPORT_DISCOUNT;
             default:
                 System.out.println("Podano zły typ zniżki");
@@ -43,11 +46,11 @@ public class TicketCash {
 
     public String setType(int option) {
         switch (option) {
-            case 1:
+            case ONLINE:
                 return "internetowy";
-            case 2:
+            case STANDARD:
                 return "standardowy";
-            case 3:
+            case GIFT:
                 return "prezentowy";
             default:
                 System.out.println("Podano zły typ biletu");
@@ -63,24 +66,24 @@ public class TicketCash {
         return events;
     }
 
-    public void addEvent(String name, String location, double ticketPrice) {
-        if (eventNumber >= events.length) {
-            events = Arrays.copyOf(events, events.length * 2);
-        }
-        events[eventNumber] = new Event(name, location, ticketPrice);
+    public void setEvents(Event[] events) {
+        this.events = events;
+    }
+
+    public void incrementEvents() {
         eventNumber++;
     }
 
     public void printDiscountTypes() {
-        System.out.println("\t1 - zniżka studencka " + (STUDENT_DISCOUNT * 100) + "%");
-        System.out.println("\t2 - paszport Polsatu " + (PASSPORT_DISCOUNT * 100) + "%");
+        System.out.println(STUDENT_DISCOUNT_OPTION + "\t - zniżka studencka " + (STUDENT_DISCOUNT * 100) + "%");
+        System.out.println(PASSPORT_DISCOUNT_OPTION + "\t - paszport Polsatu " + (PASSPORT_DISCOUNT * 100) + "%");
         System.out.println("==================================================");
     }
 
     public void printTicketTypes() {
-        System.out.println("\t" + "1 - bilet internetowy");
-        System.out.println("\t" + "2 - bilet standardowy");
-        System.out.println("\t" + "3 - bilet prezentowy");
+        System.out.println("\t" + ONLINE + " - bilet internetowy");
+        System.out.println("\t" + STANDARD + " - bilet standardowy");
+        System.out.println("\t" + GIFT + " - bilet prezentowy");
         System.out.println("==================================================");
     }
 }

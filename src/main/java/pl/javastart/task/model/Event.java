@@ -5,7 +5,7 @@ public class Event {
     private String location;
     private double ticketPrice;
 
-    Event(String name, String location, double ticketPrice) {
+    public Event(String name, String location, double ticketPrice) {
         this.name = name;
         this.location = location;
         this.ticketPrice = ticketPrice;

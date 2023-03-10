@@ -10,8 +10,4 @@ public class InputReader {
         input.nextLine();
         return number;
     }
-
-    public void close() {
-        input.close();
-    }
 }

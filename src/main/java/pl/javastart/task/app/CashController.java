@@ -5,6 +5,8 @@ import pl.javastart.task.model.Event;
 import pl.javastart.task.model.Ticket;
 import pl.javastart.task.model.TicketCash;
 
+import java.util.Arrays;
+
 class CashController {
     private static final int BUY_TICKET = 1;
     private static final int CLOSE = 0;
@@ -25,7 +27,6 @@ class CashController {
                     purchaseLoop();
                     break;
                 case CLOSE:
-                    inputReader.close();
                     break;
                 default:
                     System.out.println("Nieprawidłowa wartość");
@@ -88,5 +89,15 @@ class CashController {
 
     public TicketCash getTicketCash() {
         return ticketCash;
+    }
+
+    public void addEvent(String name, String location, double ticketPrice) {
+        Event[] events = ticketCash.getEvents();
+        int eventNumber = ticketCash.getEventNumber();
+        if (eventNumber >= events.length) {
+            ticketCash.setEvents(Arrays.copyOf(events, events.length * 2));
+        }
+        ticketCash.getEvents()[eventNumber] = new Event(name, location, ticketPrice);
+        ticketCash.incrementEvents();
     }
 }
